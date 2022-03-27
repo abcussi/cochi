@@ -1,7 +1,9 @@
+import Footer from "../Footer";
+
 function Copyright(props) {
 	return (
 		<>
-			<label>Copyright</label>
+		   <Footer>Copyright</Footer>
 		</>
 	);
 }

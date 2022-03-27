@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./containers/Dashboard";
 import LoginForm from "./containers/Login";
 import useToken from "./utils/hooks/useToken";
+import 'antd/dist/antd.css';
 function App() {
 	const { token, setToken } = useToken();
 	if (!token) {

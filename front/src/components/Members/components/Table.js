@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { getMembers } from "../../../utils/fetch";
 import useToken from "../../../utils/hooks/useToken";
 import { Context } from "../../../utils/store";
 
@@ -10,18 +11,8 @@ function Membertable() {
 		dispatch({ type: "getMembers", payload: data });
 	};
 
-	async function getMembers() {
-		return fetch("http://localhost:8081/api/members", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-		}).then((data) => data.json(data));
-	}
-
 	useEffect(() => {
-		getMembers().then((data) => {
+		getMembers(token).then((data) => {
 			updateMembers(data);
 		});
 	}, []);

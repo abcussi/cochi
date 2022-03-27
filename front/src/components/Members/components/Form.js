@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { postMembers } from "../../../utils/fetch";
 import useToken from "../../../utils/hooks/useToken";
 import { Context } from "../../../utils/store";
 
@@ -18,8 +19,6 @@ function FormMember() {
 	const [formState, setformState] = useState(initialState);
 	const { token } = useToken();
 	const [state,dispatch] = useContext(Context);
-	console.log(state, dispatch)
-
 	const validSsn = new RegExp("^\\d{3}-\\d{2}-\\d{4}$");
 	const formVal = (event) => {
 		event.preventDefault();
@@ -60,26 +59,10 @@ function FormMember() {
 		});
 	};
 
-	async function postMembers(payload) {
-		return fetch("http://localhost:8081/api/members", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify(payload),
-		})
-			.then(async (data) => {
-				const variable = await data.json();
-				return { variable, status: data.status };
-			} )
-			.catch();
-	}
-
 	const handleSubmit = async (e) => {
 		const { firstName, lastName, address, ssn } = formState;
 		e.preventDefault();
-		const test	= await postMembers({ firstName, lastName, address, ssn });
+		const test	= await postMembers({ firstName, lastName, address, ssn }, token);
 		if (test.status === 200) {
 			dispatch({ type: "pushMember", payload: test.variable });
 			setformState(initialState);

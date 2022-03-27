@@ -1,8 +1,16 @@
+import { Button, Col, Row, Space } from "antd";
+
 function Buttons(props) {
 	return (
 		<>
-			<button type='submit'>Home</button>
-            <button type='submit'>Other Page</button>
+			<Row >
+				<Col span={12} >
+					<Button style={{ width: "90%", height: "100%"  }}  type='primary'>Home</Button>
+				</Col>
+				<Col span={12} >
+					<Button style={{ width: "90%", height: "100%" }} type='primary'>Other Page</Button>
+				</Col>
+			</Row>
 		</>
 	);
 }
